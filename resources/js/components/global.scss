@@ -1,0 +1,13 @@
+$white: #EFE9F4;
+$darkBlue: #23395B;
+$blue: #0496FF;
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+@mixin userText(){
+  color: #fff;
+  text-shadow: 1px 1px 1px black;
+}
