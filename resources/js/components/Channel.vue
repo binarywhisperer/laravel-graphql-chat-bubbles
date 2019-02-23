@@ -1,14 +1,13 @@
 <template>
     <div class="channel-container">
         <header>
+            <h1>{{ one.name }}</h1>
             General <span @click="showChannels = !showChannels">\/</span>
             <ul v-if="showChannels">
                 <li>LFG</li>
                 <li>Trade Chat</li>
                 <li class="divider"></li>
-                <li>Billy Sandberg</li>
-                <li>Jules Longmire</li>
-                <li>Meta Worldpeace</li>
+                <li v-for="user in users" :key="user.id">{{ user.name }}</li>
             </ul>
         </header>
         <main>Welcome. Stay a while and read.</main>
@@ -16,6 +15,9 @@
 </template>
 
 <script>
+    import gql from 'graphql-tag';
+    import { ONE_QUERY } from "../graphql";
+
     export default {
         name:'Channel',
         props:['channel'],
@@ -23,6 +25,20 @@
             return {
                 showChannels: false
             }
+        },
+        apollo: {
+            ping: {
+                one: gql`query users(id: ${one}) {
+                                  ping(message: $message)
+                                }`,
+                // Reactive parameters
+                variables () {
+                    // Use vue reactive properties here
+                    return {
+                        one: 1,
+                    }
+                },
+            },
         },
         mounted() {
             console.log('Component mounted.')

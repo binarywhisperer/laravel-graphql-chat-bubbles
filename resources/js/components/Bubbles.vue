@@ -5,38 +5,6 @@
                 <div class="user">testcase</div>
                 <div class="time">11:02pm</div>
             </header>
-            <main>lorem ipsum ipsum morel</main>
-        </div>
-
-        <div class="bubble">
-            <header>
-                <div class="user">testcase</div>
-                <div class="time">11:02pm</div>
-            </header>
-            <main>lorem ipsumlorem ipsum ipsum morel ipsum morel</main>
-        </div>
-
-        <div class="bubble">
-            <header>
-                <div class="user">testcase</div>
-                <div class="time">11:02pm</div>
-            </header>
-            <main>lorem morel</main>
-        </div>
-
-        <div class="bubble">
-            <header>
-                <div class="user">testcase</div>
-                <div class="time">11:02pm</div>
-            </header>
-            <main>lorem ipsumlorem ipsum ipsum morellorem ipsum ipsum morel ipsum morel</main>
-        </div>
-
-        <div class="bubble">
-            <header>
-                <div class="user">testcase</div>
-                <div class="time">11:02pm</div>
-            </header>
             <main>lorem ipsum ipsum morellorem ipsum ipsum morellorem ipsum ipsum morellorem ipsum ipsum morellorem ipsum ipsum morel</main>
         </div>
     </section>
@@ -46,6 +14,9 @@
     export default {
         name:'Bubbles',
         props:['channel'],
+        apollo:{
+
+        },
         mounted() {
             console.log('Component mounted.')
         }

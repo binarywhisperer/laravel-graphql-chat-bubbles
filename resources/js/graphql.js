@@ -1,14 +1,11 @@
 import gql from "graphql-tag";
 
-export const ME_QUERY = gql`
+export const CHANNEL_QUERY = gql`
     query {
-        me {
+        channels {
             id
             name
-            email
-            points
-            primary_color
-            secondary_color
+            purpose
         }
     }
 `;
@@ -18,10 +15,21 @@ export const USERS_QUERY = gql`
         users {
             id
             name
-            email
-            points
-            primary_color
-            secondary_color
+            display
+            color
+            color_two
+        }
+    }
+`;
+
+export const ONE_QUERY = gql`
+    query One($one: Int!){
+        users (id: $one) {
+            id
+            name
+            display
+            color
+            color_two
         }
     }
 `;
