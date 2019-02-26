@@ -22,14 +22,17 @@ export const USERS_QUERY = gql`
     }
 `;
 
-export const ONE_QUERY = gql`
-    query One($one: Int!){
-        users (id: $one) {
-            id
-            name
-            display
-            color
-            color_two
+export const SEND_MESSAGE_MUTATION = gql`
+    mutation ($payload: String!, test: Int! {
+        sendMessage(payload: $payload, test: $channel_id){
+            id, 
+            payload
         }
     }
-`;
+ `;
+
+`mutation SubmitRepository($repoFullName: String!) {
+    submitRepository(repoFullName: $repoFullName) {
+        createdAt
+    }
+}`

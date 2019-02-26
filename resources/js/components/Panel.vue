@@ -16,11 +16,28 @@
 </template>
 
 <script>
+    import { SEND_MESSAGE_MUTATION } from "../graphql";
+
     export default {
         name:'Panel',
+        data(){
+          return {
+              payload: ''
+          }
+        },
         methods:{
             panelFormSubmit(){
-                alert('submitted');
+                this.$apollo.mutate({
+                    mutation: SEND_MESSAGE_MUTATION,
+                    variables: {
+                        payload: this.payload,
+                        channel_id: 1
+                    },
+                    update: (store, data) => {
+                        alert('stored');
+                        console.log('data', data);
+                    },
+                });
             }
         },
         mounted() {

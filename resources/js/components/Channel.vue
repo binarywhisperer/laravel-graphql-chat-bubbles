@@ -1,7 +1,6 @@
 <template>
     <div class="channel-container">
         <header>
-            <h1>{{ one.name }}</h1>
             General <span @click="showChannels = !showChannels">\/</span>
             <ul v-if="showChannels">
                 <li>LFG</li>
@@ -16,7 +15,7 @@
 
 <script>
     import gql from 'graphql-tag';
-    import { ONE_QUERY } from "../graphql";
+    import { USERS_QUERY } from "../graphql";
 
     export default {
         name:'Channel',
@@ -27,18 +26,9 @@
             }
         },
         apollo: {
-            ping: {
-                one: gql`query users(id: ${one}) {
-                                  ping(message: $message)
-                                }`,
-                // Reactive parameters
-                variables () {
-                    // Use vue reactive properties here
-                    return {
-                        one: 1,
-                    }
-                },
-            },
+            users:{
+                query: USERS_QUERY
+            }
         },
         mounted() {
             console.log('Component mounted.')

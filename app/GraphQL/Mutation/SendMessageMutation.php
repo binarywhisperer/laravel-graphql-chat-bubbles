@@ -6,6 +6,7 @@ namespace App\GraphQL\Mutation;
 use App\Message;
 use GraphQL;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Mutation;
 
 class SendMessageMutation extends Mutation
@@ -29,7 +30,7 @@ class SendMessageMutation extends Mutation
     public function resolve($root, $args){
         $me = Auth::user();
         if(!$me){
-            return null;
+            //return null;
         }
 
         Message::create([
@@ -37,9 +38,5 @@ class SendMessageMutation extends Mutation
             'channel_id'  => $args['channel_id'],
             'user_id' => 1
         ]);
-
-        $me->save();
-
-        return $me;
     }
 }

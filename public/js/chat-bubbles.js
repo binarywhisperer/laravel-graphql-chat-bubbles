@@ -5765,19 +5765,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _graphql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../graphql */ "./resources/js/graphql.js");
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["query users(id: ", ") {\n                              ping(message: $message)\n                            }"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-//
 //
 //
 //
@@ -5804,15 +5791,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
     };
   },
   apollo: {
-    ping: {
-      one: graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject(), one),
-      // Reactive parameters
-      variables: function variables() {
-        // Use vue reactive properties here
-        return {
-          one: 1
-        };
-      }
+    users: {
+      query: _graphql__WEBPACK_IMPORTED_MODULE_1__["USERS_QUERY"]
     }
   },
   mounted: function mounted() {
@@ -5831,6 +5811,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _graphql__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../graphql */ "./resources/js/graphql.js");
 //
 //
 //
@@ -5848,11 +5829,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Panel',
+  data: function data() {
+    return {
+      payload: ''
+    };
+  },
   methods: {
     panelFormSubmit: function panelFormSubmit() {
-      alert('submitted');
+      this.$apollo.mutate({
+        mutation: _graphql__WEBPACK_IMPORTED_MODULE_0__["SEND_MESSAGE_MUTATION"],
+        variables: {
+          payload: this.payload,
+          channel_id: 1
+        },
+        update: function update(store, data) {
+          alert('stored');
+          console.log('data', data);
+        }
+      });
     }
   },
   mounted: function mounted() {}
@@ -14588,7 +14585,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "channel-container" }, [
     _c("header", [
-      _c("h1", [_vm._v(_vm._s(_vm.one.name))]),
       _vm._v("\n        General "),
       _c(
         "span",
@@ -27839,18 +27835,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************!*\
   !*** ./resources/js/graphql.js ***!
   \*********************************/
-/*! exports provided: CHANNEL_QUERY, USERS_QUERY, ONE_QUERY */
+/*! exports provided: CHANNEL_QUERY, USERS_QUERY, SEND_MESSAGE_MUTATION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANNEL_QUERY", function() { return CHANNEL_QUERY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USERS_QUERY", function() { return USERS_QUERY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ONE_QUERY", function() { return ONE_QUERY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEND_MESSAGE_MUTATION", function() { return SEND_MESSAGE_MUTATION; });
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graphql-tag */ "./node_modules/graphql-tag/src/index.js");
 /* harmony import */ var graphql_tag__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(graphql_tag__WEBPACK_IMPORTED_MODULE_0__);
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    query One($one: Int!){\n        users (id: $one) {\n            id\n            name\n            display\n            color\n            color_two\n        }\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    mutation ($payload: String!, test: Int! {\n        sendMessage(payload: $payload, test: $channel_id){\n            id, \n            payload\n        }\n    }\n "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -27884,7 +27880,8 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var CHANNEL_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject());
 var USERS_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject2());
-var ONE_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject3());
+var SEND_MESSAGE_MUTATION = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObject3());
+"mutation SubmitRepository($repoFullName: String!) {\n    submitRepository(repoFullName: $repoFullName) {\n        createdAt\n    }\n}";
 
 /***/ }),
 
@@ -27895,7 +27892,7 @@ var ONE_QUERY = graphql_tag__WEBPACK_IMPORTED_MODULE_0___default()(_templateObje
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\BinaryWhisperer\laravel-graphql-chat-bubbles\resources\js\chat-bubbles.js */"./resources/js/chat-bubbles.js");
+module.exports = __webpack_require__(/*! /Users/brycesharp/code/laravel-graphql-chat-bubbles/resources/js/chat-bubbles.js */"./resources/js/chat-bubbles.js");
 
 
 /***/ })
