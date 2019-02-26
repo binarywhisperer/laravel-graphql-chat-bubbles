@@ -29,6 +29,8 @@ class SendMessageMutation extends Mutation
 
     public function resolve($root, $args){
         $me = Auth::user();
+
+        echo $_SESSION['laravel_token'];
         if(!$me){
             //return null;
         }

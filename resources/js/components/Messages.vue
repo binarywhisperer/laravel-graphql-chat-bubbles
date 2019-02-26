@@ -3,7 +3,7 @@
         <div>
             <div class="bubble" v-for="message in messages" :key="message.id">
                 <header>
-                    <div class="user">testcase</div>
+                    <div class="user" :style="{borderColor: message.user.color_two, backgroundColor: message.user.color }">{{ message.user.display }}</div>
                     <div class="time">{{ message.created_at }}</div>
                 </header>
                 <main>{{ message.payload }}</main>
@@ -50,15 +50,15 @@
         .bubble{
             display:flex;
             padding: 1rem 20vw;
-            font-size: 2rem;
+            font-size: 1.5rem;
 
             header{
                 text-align: center;
                 .user{
                     @include userText;
                     background: $darkBlue;
-                    border: 2px solid $blue;
-                    border-radius: 10px;
+                    border: 3px solid $blue;
+                    border-radius: 12px;
                     padding: .5rem 1rem;
                 }
                 .time{

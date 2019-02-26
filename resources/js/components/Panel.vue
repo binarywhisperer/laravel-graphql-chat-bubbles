@@ -9,30 +9,42 @@
             </form>
         </main>
         <footer>
-            <span>profile</span>
+            <a href="/test">test</a>
+            <span @click="activateProfile(true)">profile</span>
             <a href="https://github.com/binarywhisperer/laravel-graphql-chat-bubbles">github</a>
         </footer>
+        <div class="profile">
+            <profile v-if="profileActive"></profile>
+        </div>
     </section>
 </template>
 
 <script>
     import { SEND_MESSAGE_MUTATION } from "../graphql";
+    import Profile from "./Profile";
 
     export default {
         name:'Panel',
-        props:['currentChannel'],
+        components:{
+            Profile
+        },
         data(){
           return {
-              payload: ''
+              payload: '',
+              profileActive: false
           }
         },
         methods:{
+            activateProfile(active){
+                this.profileActive = active;
+            },
             panelFormSubmit(){
                 this.$apollo.mutate({
                     mutation: SEND_MESSAGE_MUTATION,
                     variables: {
                         payload: this.payload,
                         channel_id: this.$parent.currentChannel
+
                     }
                 }).then(data => this.payload = '');
             }
@@ -68,7 +80,7 @@
                     text-transform: uppercase;
                     font-size: 2rem;
                     background: $blue;
-                    color: $white;
+                    color: $darkBlue;
                     border:none;
                     box-shadow: none;
                     padding: .25rem 1rem;

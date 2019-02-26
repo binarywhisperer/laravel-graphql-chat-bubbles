@@ -102,12 +102,16 @@ return [
             'query' => [
                 'channels' => App\GraphQL\Query\ChannelsQuery::class,
                 'messages' => App\GraphQL\Query\MessageQuery::class,
-                'users' => App\GraphQL\Query\UsersQuery::class
+                'users' => App\GraphQL\Query\UsersQuery::class,
+                'me' => App\GraphQL\Query\MeQuery::class
             ],
             'mutation' => [
-                'sendMessage' => App\GraphQL\Mutation\SendMessageMutation::class
+                'sendMessage' => App\GraphQL\Mutation\SendMessageMutation::class,
+                'updateUser' => App\GraphQL\Mutation\UpdateUserMutation::class
             ],
-            'middleware' => [],
+            'middleware' => [
+
+            ],
             'method' => ['get', 'post'],
         ],
     ],

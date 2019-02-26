@@ -1,8 +1,9 @@
 <?php
 
-Route::get('/', function () {
-    return view('chat-bubbles');
-});
+Route::get('/', 'ExampleController@chatBubbles');
 Route::get('/test', function () {
-
+    dd(\Auth::user());
 });
+
+
+return view('chat-bubbles');
