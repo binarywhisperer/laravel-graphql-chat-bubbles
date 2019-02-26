@@ -10,7 +10,8 @@ use GraphQL\Type\Definition\Type;
 class ChannelsQuery extends Query
 {
     protected $attributes = [
-        'name' => 'channels'
+        'name' => 'Channel Query',
+        'description' => 'A query of channels'
     ];
 
     public function type()
@@ -29,10 +30,9 @@ class ChannelsQuery extends Query
 
     public function resolve($root, $args){
         if(isset($args['id'])){
-            return Channel::find('id')->get();
-        }elseif (isset($args['email'])){
-            return Channel::where('name', $args['name'])->get();
+            return Channel::where('id',$args['id'])->get();
         }
+
         return Channel::all();
     }
 }

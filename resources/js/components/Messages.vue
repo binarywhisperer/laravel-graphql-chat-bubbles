@@ -1,31 +1,49 @@
 <template>
     <section class="bubbles-container">
-        <div class="bubble">
-            <header>
-                <div class="user">testcase</div>
-                <div class="time">11:02pm</div>
-            </header>
-            <main>lorem ipsum ipsum morellorem ipsum ipsum morellorem ipsum ipsum morellorem ipsum ipsum morellorem ipsum ipsum morel</main>
+        <div>
+            <div class="bubble" v-for="message in messages" :key="message.id">
+                <header>
+                    <div class="user">testcase</div>
+                    <div class="time">{{ message.created_at }}</div>
+                </header>
+                <main>{{ message.payload }}</main>
+            </div>
         </div>
     </section>
 </template>
 
 <script>
+    import { MESSAGES_QUERY } from "../graphql";
+
     export default {
         name:'Bubbles',
-        props:['channel'],
-        apollo:{
-
+        apollo: {
+            messages: {
+                query: MESSAGES_QUERY,
+                variables(){
+                    return {
+                        id: this.$parent.currentChannel
+                    }
+                },
+                pollInterval: 1000
+            }
         },
         mounted() {
-            console.log('Component mounted.')
+        },
+        updated(){
+            let container = document.querySelector(".bubbles-container");
+            container.scrollTop = container.scrollHeight;
         }
+
     }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
     @import "global";
     .bubbles-container{
+        overflow-y: scroll;
+        max-height: 80vh;
+        flex-grow:1;
         background: $white;
         color: $darkBlue;
 

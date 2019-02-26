@@ -33,10 +33,12 @@ class SendMessageMutation extends Mutation
             //return null;
         }
 
-        Message::create([
+        $message = Message::create([
             'payload'  => $args['payload'],
             'channel_id'  => $args['channel_id'],
             'user_id' => 1
         ]);
+
+        return $message;
     }
 }

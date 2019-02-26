@@ -20,6 +20,7 @@
 
     export default {
         name:'Panel',
+        props:['currentChannel'],
         data(){
           return {
               payload: ''
@@ -31,13 +32,9 @@
                     mutation: SEND_MESSAGE_MUTATION,
                     variables: {
                         payload: this.payload,
-                        channel_id: 1
-                    },
-                    update: (store, data) => {
-                        alert('stored');
-                        console.log('data', data);
-                    },
-                });
+                        channel_id: this.$parent.currentChannel
+                    }
+                }).then(data => this.payload = '');
             }
         },
         mounted() {
@@ -46,9 +43,10 @@
     }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
     @import "global";
     .panel-container{
+        height: 15vh;
         background: $darkBlue;
         color: $white;
 
@@ -85,7 +83,7 @@
 
         footer{
             display:flex;
-            justify-content: center;
+            justify-content: flex-end;
             span,
             a{
                 cursor:pointer;

@@ -26,6 +26,10 @@ class MessageType extends GraphQLType
             'channel_id' => [
                 'type' => Type::nonNull(Type::id()),
                 'description' => "The channel id of the message."
+            ],
+            'created_at' => [
+                'type' => Type::nonNull(Type::string()),
+                'description' => "The creation time of the message."
             ]
         ];
     }

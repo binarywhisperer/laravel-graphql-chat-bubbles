@@ -11,7 +11,7 @@ use GraphQL\Type\Definition\Type;
 class MessageQuery extends Query
 {
     protected $attributes = [
-        'name' => 'messages'
+        'name' => 'Messages Qyert'
     ];
 
     public function type()
@@ -24,16 +24,28 @@ class MessageQuery extends Query
         return [
             'id' => ['name' => 'id', 'type' => Type::id()],
             'payload' => ['name' => 'payload', 'type' => Type::string()],
-            'channel_id' => ['name' => 'id', 'type' => Type::id()]
+            'channel_id' => ['name' => 'channel_id', 'type' => Type::id()],
+            'created_at' => ['name' => 'created_at', 'type' => Type::string()],
+            'all' => ['name' => 'all', 'type' => Type::string()]
         ];
     }
 
     public function resolve($root, $args){
-        if(isset($args['id'])){
-            return Message::find('id')->get();
-        }elseif (isset($args['channel_id'])){
-            return Message::where('channel_id', $args['channel_id'])->get();
+        $where = function ($query) use ($args) {
+            if (isset($args['id'])) {
+                $query->where('id',$args['id']);
+            }
+            if (isset($args['channel_id'])) {
+                $query->where('channel_id',$args['channel_id']);
+            }
+        };
+
+        $messages = Message::where($where)->orderBy('created_at', 'DESC');
+
+        if(!isset($args['all'])) {
+           $messages->take(5);
         }
-        return Message::all();
+
+        return $messages->get()->sortBy('created_at');
     }
 }

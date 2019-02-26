@@ -1,8 +1,11 @@
 $white: #EFE9F4;
-$darkBlue: #23395B;
-$blue: #0496FF;
+$darkBlue: #1a4753;
+$blue: #9fd1de;
+
+@import url('https://fonts.googleapis.com/css?family=Coiny');
 
 body{
+  font-family: 'Coiny', cursive;
   margin: 0;
   padding: 0;
 }

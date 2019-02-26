@@ -1,8 +1,6 @@
 import Vue from 'vue';
 
-import Bubbles from './components/Bubbles';
-import Channel from './components/Channel';
-import Panel from './components/Panel';
+import ChatBubbles from './components/ChatBubbles';
 
 import { HttpLink } from "apollo-link-http";
 import { ApolloClient } from "apollo-client";
@@ -42,9 +40,7 @@ Vue.config.productionTip = false;
 const chatBubbles = new Vue({
     el: '#chat-bubbles',
     components: {
-        Bubbles,
-        Channel,
-        Panel
+        ChatBubbles
     },
     apolloProvider,
     data(){

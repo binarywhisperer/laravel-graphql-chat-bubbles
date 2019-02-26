@@ -8,9 +8,7 @@
     </head>
     <body>
         <section id="chat-bubbles">
-            <channel></channel>
-            <bubbles></bubbles>
-            <panel></panel>
+            <chat-bubbles></chat-bubbles>
         </section>
     <script src="/js/chat-bubbles.js"></script>
     </body>
